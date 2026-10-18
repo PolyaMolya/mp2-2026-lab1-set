@@ -296,3 +296,42 @@ TEST(TSet, check_negation_operator)
 
 	EXPECT_EQ(expSet, set1);
 }
+TEST(TSet, mnogo_operatsiy_v_odnoy_stroke_mnvo) {
+	const int size = 5;
+	TSet set1(size), set2(size), set3(size), expSet(size);
+	set1.InsElem(1);
+	set2.InsElem(2);
+	set3.InsElem(3);
+
+	expSet.InsElem(1);
+	expSet.InsElem(2);
+	expSet.InsElem(3);
+	TSet resSet = set1 + set2 + set3;
+	EXPECT_EQ(expSet, resSet);
+}
+TEST(TSet, mnogo_raznotip_operatsiy_v_odnoy_stroke_mnvo) {
+	const int size = 5;
+	TSet set1(size), set2(size), set3(size), expSet(size);
+	set1.InsElem(1);
+	set1.InsElem(3);
+
+	set2.InsElem(1);
+	set2.InsElem(2);
+
+	set3.InsElem(2);
+	set3.InsElem(3);
+	set3.InsElem(4);
+
+	expSet.InsElem(1);
+	TSet resSet = (set1 + set2) * ~set3;
+	EXPECT_EQ(expSet, resSet);
+}
+TEST(TSet, izbytochnoe_udalenie) {
+	const int size = 10;
+	TSet set(size), expSet(size);
+	set.InsElem(1);
+	expSet.InsElem(1);
+	expSet.InsElem(3);
+	TSet resSet = (set - 5) + 3;
+	EXPECT_EQ(expSet, resSet);
+}

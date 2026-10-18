@@ -310,3 +310,52 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
     EXPECT_NE(bf1, bf2);
 }
+TEST(TBitField, mnogo_odnotip_operatsiy_v_odnoy_stroke) {
+    const int size = 5;
+    TBitField bf1(size), bf2(size), bf3(size), expBf(size);
+    bf1.SetBit(1);
+    bf1.SetBit(3);
+
+    bf2.SetBit(1);
+    bf2.SetBit(2);
+
+    bf3.SetBit(2);
+    bf3.SetBit(3);
+    bf3.SetBit(4);
+
+    expBf.SetBit(1);
+    expBf.SetBit(2);
+    expBf.SetBit(3);
+    expBf.SetBit(4);
+    TBitField resBf = bf1 | bf2 | bf3;
+    EXPECT_EQ(expBf, resBf);
+}
+TEST(TBitField, mnogo_raznotip_operatsiy_v_odnoy_stroke) {
+    const int size = 5;
+    TBitField bf1(size), bf2(size), bf3(size), expBf(size);
+    bf1.SetBit(1);
+    bf1.SetBit(3);
+
+    bf2.SetBit(1);
+    bf2.SetBit(2);
+
+    bf3.SetBit(2);
+    bf3.SetBit(3);
+    bf3.SetBit(4);
+
+    expBf.SetBit(1);
+    TBitField resBf = (bf1 | bf2) & ~bf3;
+    EXPECT_EQ(expBf, resBf);
+}
+TEST(TBitField, zakon_de_morgana) {
+    const int size = 10;
+    TBitField bf1(size), bf2(size);
+    bf1.SetBit(2);
+    bf1.SetBit(5);
+
+    bf2.SetBit(5);
+    bf2.SetBit(8);
+    TBitField res1 = ~(bf1 | bf2);
+    TBitField res2 = ~bf1 & ~bf2;
+    EXPECT_EQ(res1, res2);
+}

@@ -8,7 +8,7 @@
 // Битовое поле
 
 #include <iostream>
-
+#include <stdexcept>
 using namespace std;
 
 typedef unsigned int TELEM;

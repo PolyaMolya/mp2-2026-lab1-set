@@ -7,7 +7,7 @@
 // Множество
 
 #include "tbitfield.h"
-
+#include <stdexcept>
 class TSet
 {
 private:
