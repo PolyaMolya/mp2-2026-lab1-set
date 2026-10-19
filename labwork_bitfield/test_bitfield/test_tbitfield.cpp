@@ -156,14 +156,11 @@ TEST(TBitField, or_operator_applied_to_bitfields_of_equal_size)
 {
     const int size = 4;
     TBitField bf1(size), bf2(size), expBf(size);
-    // bf1 = 0011
     bf1.SetBit(2);
     bf1.SetBit(3);
-    // bf2 = 0101
     bf2.SetBit(1);
     bf2.SetBit(3);
 
-    // expBf = 0111
     expBf.SetBit(1);
     expBf.SetBit(2);
     expBf.SetBit(3);
@@ -175,14 +172,11 @@ TEST(TBitField, or_operator_applied_to_bitfields_of_non_equal_size)
 {
     const int size1 = 4, size2 = 5;
     TBitField bf1(size1), bf2(size2), expBf(size2);
-    // bf1 = 0011
     bf1.SetBit(2);
     bf1.SetBit(3);
-    // bf2 = 01010
     bf2.SetBit(1);
     bf2.SetBit(3);
 
-    // expBf = 01110
     expBf.SetBit(1);
     expBf.SetBit(2);
     expBf.SetBit(3);
@@ -194,14 +188,11 @@ TEST(TBitField, and_operator_applied_to_bitfields_of_equal_size)
 {
     const int size = 4;
     TBitField bf1(size), bf2(size), expBf(size);
-    // bf1 = 0011
     bf1.SetBit(2);
     bf1.SetBit(3);
-    // bf2 = 0101
     bf2.SetBit(1);
     bf2.SetBit(3);
 
-    // expBf = 0001
     expBf.SetBit(3);
 
     EXPECT_EQ(expBf, bf1 & bf2);
@@ -211,14 +202,11 @@ TEST(TBitField, and_operator_applied_to_bitfields_of_non_equal_size)
 {
     const int size1 = 4, size2 = 5;
     TBitField bf1(size1), bf2(size2), expBf(size2);
-    // bf1 = 0011
     bf1.SetBit(2);
     bf1.SetBit(3);
-    // bf2 = 01010
     bf2.SetBit(1);
     bf2.SetBit(3);
 
-    // expBf = 00010
     expBf.SetBit(3);
 
     EXPECT_EQ(expBf, bf1 & bf2);
@@ -228,11 +216,9 @@ TEST(TBitField, can_invert_bitfield)
 {
     const int size = 2;
     TBitField bf(size), negBf(size), expNegBf(size);
-    // bf = 01
     bf.SetBit(1);
     negBf = ~bf;
 
-    // expNegBf = 10
     expNegBf.SetBit(0);
 
     EXPECT_EQ(expNegBf, negBf);
@@ -256,16 +242,12 @@ TEST(TBitField, invert_plus_and_operator_on_different_size_bitfield)
 {
     const int firstSze = 4, secondSize = 8;
     TBitField firstBf(firstSze), negFirstBf(firstSze), secondBf(secondSize), testBf(secondSize);
-    // firstBf = 0001
     firstBf.SetBit(0);
     negFirstBf = ~firstBf;
-    // negFirstBf = 1110
 
-    // secondBf = 00011000
     secondBf.SetBit(3);
     secondBf.SetBit(4);
 
-    // testBf = 00001000
     testBf.SetBit(3);
 
     EXPECT_EQ(secondBf & negFirstBf, testBf);
@@ -309,4 +291,95 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
     bf2.SetBit(2);
 
     EXPECT_NE(bf1, bf2);
+}
+// Собственные тесты
+TEST(Simple, sum_of_first_five_odd_numbers_is_five_squared)
+{
+    EXPECT_EQ(5 * 5, 1 + 3 + 5 + 7 + 9);
+}
+
+TEST(Simple, sum_of_first_six_odd_numbers_is_six_squared)
+{
+    EXPECT_EQ(6 * 6, 1 + 3 + 5 + 7 + 9 + 11);
+}
+
+TEST(TBitField, double_clear_bit_leaves_it_zero)
+{
+    TBitField bf(10);
+
+    bf.SetBit(4);
+    bf.ClrBit(4);
+    bf.ClrBit(4);
+
+    EXPECT_EQ(0, bf.GetBit(4));
+}
+
+TEST(TBitField, double_set_bit_leaves_it_set)
+{
+    TBitField bf(10);
+
+    bf.SetBit(4);
+    bf.SetBit(4);
+
+    EXPECT_NE(0, bf.GetBit(4));
+}
+
+TEST(TBitField, can_or_three_bitfields_in_one_expression)
+{
+    const int size = 40;
+    TBitField bf1(size), bf2(size), bf3(size), expBf(size);
+    bf1.SetBit(0);
+    bf2.SetBit(17);
+    bf3.SetBit(39);
+
+    expBf.SetBit(0);
+    expBf.SetBit(17);
+    expBf.SetBit(39);
+
+    EXPECT_EQ(expBf, bf1 | bf2 | bf3);
+}
+
+TEST(TBitField, can_and_three_bitfields_in_one_expression)
+{
+    const int size = 40;
+    TBitField bf1(size), bf2(size), bf3(size), expBf(size);
+    bf1.SetBit(5);
+    bf1.SetBit(33);
+    bf2.SetBit(33);
+    bf2.SetBit(7);
+    bf3.SetBit(33);
+    bf3.SetBit(5);
+
+    expBf.SetBit(33);
+
+    EXPECT_EQ(expBf, bf1 & bf2 & bf3);
+}
+
+TEST(TBitField, copied_bitfield_is_independent_of_original)
+{
+    TBitField bf1(10);
+    bf1.SetBit(2);
+    TBitField bf2(bf1);
+
+    bf2.SetBit(5);
+
+    EXPECT_EQ(0, bf1.GetBit(5));
+    EXPECT_NE(0, bf2.GetBit(2));
+}
+
+TEST(TBitField, bitfields_of_different_length_are_not_equal)
+{
+    TBitField bf1(4), bf2(5);
+
+    EXPECT_NE(bf1, bf2);
+}
+
+TEST(TBitField, can_set_last_bit_of_bitfield_with_length_multiple_of_word)
+{
+    const int size = 64;
+    TBitField bf(size);
+
+    bf.SetBit(size - 1);
+
+    EXPECT_NE(0, bf.GetBit(size - 1));
 }
