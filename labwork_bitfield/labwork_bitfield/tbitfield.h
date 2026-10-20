@@ -24,9 +24,9 @@ private:
 	int   GetMemIndex(const int n) const; // индекс в pМем для бита n       (#О2)
 	TELEM GetMemMask(const int n) const; // битовая маска для бита n       (#О3)
 public:
-	TBitField(int len);                //                                   (#О1)
-	TBitField(const TBitField& bf);    //                                   (#П1)
-	~TBitField();                      //                                    (#С)
+	TBitField(int len);                // конструктор реализации            (#О1)
+	TBitField(const TBitField& bf);    // конструктор копирования           (#П1)
+	~TBitField();                      // деструктор                         (#С)
 
 	// доступ к битам
 	int GetLength(void) const;      // получить длину (к-во битов)           (#О)
