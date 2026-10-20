@@ -1,0 +1,104 @@
+Running main() from /usr/src/debug/gtest/googletest-1.18.0/googletest/src/gtest_main.cc
+[==========] Running 46 tests from 2 test suites.
+[----------] Global test environment set-up.
+[----------] 25 tests from TBitField
+[ RUN      ] TBitField.can_create_bitfield_with_positive_length
+[       OK ] TBitField.can_create_bitfield_with_positive_length (0 ms)
+[ RUN      ] TBitField.can_get_length
+[       OK ] TBitField.can_get_length (0 ms)
+[ RUN      ] TBitField.new_bitfield_is_set_to_zero
+[       OK ] TBitField.new_bitfield_is_set_to_zero (0 ms)
+[ RUN      ] TBitField.can_set_bit
+[       OK ] TBitField.can_set_bit (0 ms)
+[ RUN      ] TBitField.can_clear_bit
+[       OK ] TBitField.can_clear_bit (0 ms)
+[ RUN      ] TBitField.throws_when_create_bitfield_with_negative_length
+[       OK ] TBitField.throws_when_create_bitfield_with_negative_length (0 ms)
+[ RUN      ] TBitField.throws_when_set_bit_with_negative_index
+[       OK ] TBitField.throws_when_set_bit_with_negative_index (0 ms)
+[ RUN      ] TBitField.throws_when_set_bit_with_too_large_index
+[       OK ] TBitField.throws_when_set_bit_with_too_large_index (0 ms)
+[ RUN      ] TBitField.throws_when_get_bit_with_negative_index
+[       OK ] TBitField.throws_when_get_bit_with_negative_index (0 ms)
+[ RUN      ] TBitField.throws_when_get_bit_with_too_large_index
+[       OK ] TBitField.throws_when_get_bit_with_too_large_index (0 ms)
+[ RUN      ] TBitField.throws_when_clear_bit_with_negative_index
+[       OK ] TBitField.throws_when_clear_bit_with_negative_index (0 ms)
+[ RUN      ] TBitField.throws_when_clear_bit_with_too_large_index
+[       OK ] TBitField.throws_when_clear_bit_with_too_large_index (0 ms)
+[ RUN      ] TBitField.can_assign_bitfields_of_equal_size
+[       OK ] TBitField.can_assign_bitfields_of_equal_size (0 ms)
+[ RUN      ] TBitField.assign_operator_changes_bitfield_size
+[       OK ] TBitField.assign_operator_changes_bitfield_size (0 ms)
+[ RUN      ] TBitField.can_assign_bitfields_of_non_equal_size
+[       OK ] TBitField.can_assign_bitfields_of_non_equal_size (0 ms)
+[ RUN      ] TBitField.compare_equal_bitfields_of_equal_size
+[       OK ] TBitField.compare_equal_bitfields_of_equal_size (0 ms)
+[ RUN      ] TBitField.or_operator_applied_to_bitfields_of_equal_size
+[       OK ] TBitField.or_operator_applied_to_bitfields_of_equal_size (0 ms)
+[ RUN      ] TBitField.or_operator_applied_to_bitfields_of_non_equal_size
+[       OK ] TBitField.or_operator_applied_to_bitfields_of_non_equal_size (0 ms)
+[ RUN      ] TBitField.and_operator_applied_to_bitfields_of_equal_size
+[       OK ] TBitField.and_operator_applied_to_bitfields_of_equal_size (0 ms)
+[ RUN      ] TBitField.and_operator_applied_to_bitfields_of_non_equal_size
+[       OK ] TBitField.and_operator_applied_to_bitfields_of_non_equal_size (0 ms)
+[ RUN      ] TBitField.can_invert_bitfield
+[       OK ] TBitField.can_invert_bitfield (0 ms)
+[ RUN      ] TBitField.can_invert_large_bitfield
+[       OK ] TBitField.can_invert_large_bitfield (0 ms)
+[ RUN      ] TBitField.invert_plus_and_operator_on_different_size_bitfield
+[       OK ] TBitField.invert_plus_and_operator_on_different_size_bitfield (0 ms)
+[ RUN      ] TBitField.can_invert_many_random_bits_bitfield
+[       OK ] TBitField.can_invert_many_random_bits_bitfield (0 ms)
+[ RUN      ] TBitField.bitfields_with_different_bits_are_not_equal
+[       OK ] TBitField.bitfields_with_different_bits_are_not_equal (0 ms)
+[----------] 25 tests from TBitField (0 ms total)
+
+[----------] 21 tests from TSet
+[ RUN      ] TSet.can_get_max_power_set
+[       OK ] TSet.can_get_max_power_set (0 ms)
+[ RUN      ] TSet.can_insert_non_existing_element
+[       OK ] TSet.can_insert_non_existing_element (0 ms)
+[ RUN      ] TSet.can_insert_existing_element
+[       OK ] TSet.can_insert_existing_element (0 ms)
+[ RUN      ] TSet.can_delete_non_existing_element
+[       OK ] TSet.can_delete_non_existing_element (0 ms)
+[ RUN      ] TSet.can_delete_existing_element
+[       OK ] TSet.can_delete_existing_element (0 ms)
+[ RUN      ] TSet.compare_two_sets_of_non_equal_sizes
+[       OK ] TSet.compare_two_sets_of_non_equal_sizes (0 ms)
+[ RUN      ] TSet.compare_two_equal_sets
+[       OK ] TSet.compare_two_equal_sets (0 ms)
+[ RUN      ] TSet.compare_two_non_equal_sets
+[       OK ] TSet.compare_two_non_equal_sets (0 ms)
+[ RUN      ] TSet.can_assign_set_of_equal_size
+[       OK ] TSet.can_assign_set_of_equal_size (0 ms)
+[ RUN      ] TSet.can_assign_set_of_greater_size
+[       OK ] TSet.can_assign_set_of_greater_size (0 ms)
+[ RUN      ] TSet.can_assign_set_of_less_size
+[       OK ] TSet.can_assign_set_of_less_size (0 ms)
+[ RUN      ] TSet.can_insert_non_existing_element_using_plus_operator
+[       OK ] TSet.can_insert_non_existing_element_using_plus_operator (0 ms)
+[ RUN      ] TSet.throws_when_insert_non_existing_element_out_of_range_using_plus_operator
+[       OK ] TSet.throws_when_insert_non_existing_element_out_of_range_using_plus_operator (0 ms)
+[ RUN      ] TSet.can_insert_existing_element_using_plus_operator
+[       OK ] TSet.can_insert_existing_element_using_plus_operator (0 ms)
+[ RUN      ] TSet.check_size_of_the_combination_of_two_sets_of_equal_size
+[       OK ] TSet.check_size_of_the_combination_of_two_sets_of_equal_size (0 ms)
+[ RUN      ] TSet.can_combine_two_sets_of_equal_size
+[       OK ] TSet.can_combine_two_sets_of_equal_size (0 ms)
+[ RUN      ] TSet.check_size_changes_of_the_combination_of_two_sets_of_non_equal_size
+[       OK ] TSet.check_size_changes_of_the_combination_of_two_sets_of_non_equal_size (0 ms)
+[ RUN      ] TSet.can_combine_two_sets_of_non_equal_size
+[       OK ] TSet.can_combine_two_sets_of_non_equal_size (0 ms)
+[ RUN      ] TSet.can_intersect_two_sets_of_equal_size
+[       OK ] TSet.can_intersect_two_sets_of_equal_size (0 ms)
+[ RUN      ] TSet.can_intersect_two_sets_of_non_equal_size
+[       OK ] TSet.can_intersect_two_sets_of_non_equal_size (0 ms)
+[ RUN      ] TSet.check_negation_operator
+[       OK ] TSet.check_negation_operator (0 ms)
+[----------] 21 tests from TSet (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 46 tests from 2 test suites ran. (0 ms total)
+[  PASSED  ] 46 tests.
