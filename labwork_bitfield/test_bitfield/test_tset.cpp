@@ -1,7 +1,7 @@
 #include "pch.h"
 
 #include "../labwork_bitfield/tset.h"
-
+#include <stdexcept>
 
 TEST(TSet, can_get_max_power_set)
 {
@@ -295,4 +295,36 @@ TEST(TSet, check_negation_operator)
 	expSet.InsElem(2);
 
 	EXPECT_EQ(expSet, set1);
+}
+
+TEST(TSet, absorb) //Закон поглощения
+{
+	const int size = 5;
+	TSet a(size), b(size);
+	a.InsElem(1); 
+	a.InsElem(2); 
+	a.InsElem(3);
+	b.InsElem(2); 
+	b.InsElem(3); 
+	b.InsElem(4);
+
+	TSet result = a + (a * b);
+	EXPECT_EQ(a, result);      
+}
+
+TEST(TSet, distributive) // Дистрибутивность
+{
+	const int size = 6;
+	TSet a(size), b(size), c(size);
+	a.InsElem(1); 
+	a.InsElem(2);
+	b.InsElem(2); 
+	b.InsElem(3);
+	c.InsElem(0); 
+	c.InsElem(2);
+
+	TSet left = a + (b * c);
+	TSet right = (a + b) * (a + c); 
+
+	EXPECT_EQ(left, right);
 }
