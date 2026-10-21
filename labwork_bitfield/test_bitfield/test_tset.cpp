@@ -296,3 +296,29 @@ TEST(TSet, check_negation_operator)
 
 	EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, double_setting_elem_working) 
+{
+	const int size = 4;
+	TSet set(size);
+
+	set.InsElem(1);
+	set.InsElem(1);
+
+	EXPECT_EQ(set.IsMember(1), 1);
+}
+
+TEST(TSet, double_or_correct) {
+	const int size = 3;
+	TSet set1(size), set2(size), set3(size), set_ans(size);
+
+	set1.InsElem(0);
+	set2.InsElem(1);
+	set3.InsElem(2);
+
+	for (int i = 0; i < size; i++) {
+		set_ans.InsElem(i);
+	}
+
+	EXPECT_EQ((set1 + set2 + set3), set_ans);
+}
