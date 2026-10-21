@@ -296,3 +296,50 @@ TEST(TSet, check_negation_operator)
 
 	EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, can_chain_multiple_additions)
+{
+	const int size = 6;
+	TSet set1(size), set2(size), set3(size), result(size);
+
+	set1.InsElem(1);
+	set2.InsElem(2);
+	set3.InsElem(3);
+
+	result = set1 + set2 + set3;
+
+	EXPECT_NE(result.IsMember(1), 0);
+	EXPECT_NE(result.IsMember(2), 0);
+	EXPECT_NE(result.IsMember(3), 0);
+	EXPECT_EQ(result.IsMember(4), 0);
+}
+
+TEST(TSet, can_remove_element_using_minus_operator)
+{
+	const int size = 5;
+	const int k = 3;
+	TSet set(size), updatedSet(size);
+
+	set.InsElem(1);
+	set.InsElem(k);
+
+	updatedSet = set - k;
+
+	EXPECT_EQ(updatedSet.IsMember(k), 0);
+	EXPECT_NE(updatedSet.IsMember(1), 0);
+	EXPECT_NE(set.IsMember(k), 0);
+}
+
+TEST(TSet, check_DeMorgan_law)
+{
+	const int size = 5;
+	TSet A(size), B(size);
+	A.InsElem(1); A.InsElem(2);
+	B.InsElem(2); B.InsElem(3);
+
+	TSet left = ~(A + B);
+
+	TSet right = (~A) * (~B);
+
+	EXPECT_EQ(left, right);
+}
