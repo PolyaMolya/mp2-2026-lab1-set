@@ -296,3 +296,65 @@ TEST(TSet, check_negation_operator)
 
 	EXPECT_EQ(expSet, set1);
 }
+
+/*СВОИ ТЕСТЫ*/
+
+TEST(TSet, combine_three_sets_in_one_line)
+{
+	const int size = 8;
+	TSet set1(size), set2(size), set3(size), expSet(size);
+	set1.InsElem(1);
+	set2.InsElem(3);
+	set3.InsElem(5);
+	expSet.InsElem(1);
+	expSet.InsElem(3);
+	expSet.InsElem(5);
+
+	EXPECT_EQ(expSet, set1 + set2 + set3);
+}
+
+TEST(TSet, intersect_three_sets_in_one_line)
+{
+	const int size = 8;
+	TSet set1(size), set2(size), set3(size), expSet(size);
+	set1.InsElem(1);
+	set1.InsElem(3);
+	set2.InsElem(3);
+	set2.InsElem(5);
+	set3.InsElem(3);
+	expSet.InsElem(3);
+
+	EXPECT_EQ(expSet, set1 * set2 * set3);
+}
+
+TEST(TSet, negation_of_negation_gives_original_set)
+{
+	const int size = 6;
+	TSet set(size);
+	set.InsElem(0);
+	set.InsElem(4);
+
+	EXPECT_EQ(set, ~~set);
+}
+
+TEST(TSet, union_with_complement_gives_full_set)
+{
+	const int size = 5;
+	TSet set(size), fullSet(size);
+	set.InsElem(1);
+	set.InsElem(3);
+	for (int i = 0; i < size; i++)
+		fullSet.InsElem(i);
+
+	EXPECT_EQ(fullSet, set + ~set);
+}
+
+TEST(TSet, intersection_with_complement_is_empty)
+{
+	const int size = 5;
+	TSet set(size), emptySet(size);
+	set.InsElem(1);
+	set.InsElem(3);
+
+	EXPECT_EQ(emptySet, set * ~set);
+}

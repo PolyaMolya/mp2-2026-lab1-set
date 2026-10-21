@@ -310,3 +310,78 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
     EXPECT_NE(bf1, bf2);
 }
+
+/*СВОИ ТЕСТЫ*/
+TEST(TBitField, double_clear_leaves_bit_zero)
+{
+    TBitField bf(10);
+    bf.SetBit(3);
+    bf.ClrBit(3);
+    bf.ClrBit(3);
+
+    EXPECT_EQ(0, bf.GetBit(3));
+}
+
+TEST(TBitField, double_set_leaves_bit_one)
+{
+    TBitField bf(10);
+    bf.SetBit(3);
+    bf.SetBit(3);
+
+    EXPECT_EQ(1, bf.GetBit(3));
+}
+
+TEST(TBitField, or_three_bitfields_in_one_line)
+{
+    TBitField bf1(10), bf2(10), bf3(10), expBf(10);
+    bf1.SetBit(1);
+    bf2.SetBit(4);
+    bf3.SetBit(7);
+    expBf.SetBit(1);
+    expBf.SetBit(4);
+    expBf.SetBit(7);
+
+    EXPECT_EQ(expBf, bf1 | bf2 | bf3);
+}
+
+TEST(TBitField, and_three_bitfields_in_one_line)
+{
+    TBitField bf1(10), bf2(10), bf3(10), expBf(10);
+    bf1.SetBit(1);
+    bf1.SetBit(4);
+    bf2.SetBit(4);
+    bf2.SetBit(7);
+    bf3.SetBit(4);
+    expBf.SetBit(4);
+
+    EXPECT_EQ(expBf, bf1 & bf2 & bf3);
+}
+
+TEST(TBitField, negation_twice_gives_original)
+{
+    TBitField bf(40), expBf(40);
+    bf.SetBit(0);
+    bf.SetBit(33);
+    expBf.SetBit(0);
+    expBf.SetBit(33);
+
+    EXPECT_EQ(expBf, ~~bf);
+}
+
+TEST(TBitField, negation_of_empty_field_has_all_bits_set)
+{
+    TBitField bf(40), expBf(40);
+    for (int i = 0; i < 40; i++)
+        expBf.SetBit(i);
+
+    EXPECT_EQ(expBf, ~bf);
+}
+
+TEST(TBitField, self_assignment_keeps_bits)
+{
+    TBitField bf(10);
+    bf.SetBit(2);
+    bf = bf;
+
+    EXPECT_EQ(1, bf.GetBit(2));
+}
