@@ -1,5 +1,4 @@
 #include "pch.h"
-
 #include "../labwork_bitfield/tbitfield.h"
 
 
@@ -307,6 +306,37 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
     bf2.SetBit(1);
     bf2.SetBit(2);
+
+    EXPECT_NE(bf1, bf2);
+}
+//1. копия созданная конструктором копирования = оригиналу
+TEST(TBitField, copy1)
+{
+    TBitField bf(10);
+    bf.SetBit(2);
+    bf.SetBit(7);
+
+    TBitField copy(bf);
+
+    EXPECT_EQ(bf, copy);
+}
+
+// 2. изменение оригинала не меняет копию
+TEST(TBitField, copy2)
+{
+    TBitField bf1(10);
+    bf1.SetBit(3);
+
+    TBitField bf2(bf1);
+    bf1.ClrBit(3);
+
+    EXPECT_NE(0, bf2.GetBit(3));
+}
+
+// 3. поля разной длины не равны
+TEST(TBitField, another_length)
+{
+    TBitField bf1(5), bf2(6);
 
     EXPECT_NE(bf1, bf2);
 }
