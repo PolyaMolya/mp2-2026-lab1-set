@@ -5,16 +5,9 @@
 //   Update без сборки для Microsoft Visual Studio 2026 Бусько П.В.
 //
 // Тестирование битового поля и множества
-
 #include <iomanip>
-
-//#define USE_SET // Использовать класс TSet,
-                // закоментировать, чтобы использовать битовое поле
-
 #ifndef USE_SET // Использовать класс TBitField
-
 #include "tbitfield.h"
-
 int main()
 {
     int n, m, k, count;
@@ -52,9 +45,7 @@ int main()
     cout << "В первых " << n << " числах " << count << " простых" << endl;
 }
 #else
-
 #include "tset.h"
-
 int main()
 {
     int n, m, k, count;

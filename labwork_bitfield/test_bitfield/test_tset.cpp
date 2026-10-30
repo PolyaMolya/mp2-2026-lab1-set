@@ -1,5 +1,4 @@
-#include "pch.h"
-
+#include "pch.h" 
 #include "../labwork_bitfield/tset.h"
 
 
@@ -295,4 +294,26 @@ TEST(TSet, check_negation_operator)
 	expSet.InsElem(2);
 
 	EXPECT_EQ(expSet, set1);
+}
+// 4. нельзя добавить элемент, которого нет в юниверсе
+TEST(TSet, T_1)
+{
+	const int size = 5;
+	TSet set(size);
+
+	ASSERT_ANY_THROW(set.InsElem(size));
+}
+
+// 5. двойное дополнение возвращает исходное множество
+TEST(TSet, T_2)
+{
+	const int size = 5;
+	TSet set(size);
+	// set = {1, 4}
+	set.InsElem(1);
+	set.InsElem(4);
+
+	TSet twice = ~(~set);
+
+	EXPECT_EQ(set, twice);
 }
