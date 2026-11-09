@@ -1,7 +1,7 @@
 #include "pch.h"
 
 #include "../labwork_bitfield/tbitfield.h"
-
+#include <stdexcept>
 
 TEST(TBitField, can_create_bitfield_with_positive_length)
 {
@@ -309,4 +309,31 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
     bf2.SetBit(2);
 
     EXPECT_NE(bf1, bf2);
+}
+TEST(TBitField, De_Morgan) //Закон Де Моргана
+{
+    const int size = 5;
+    TBitField a(size), b(size);
+    a.SetBit(1); 
+    a.SetBit(3);
+    b.SetBit(3); 
+    b.SetBit(4);
+
+    TBitField left = ~ (a | b);
+    TBitField right = (~a) & (~b);
+
+    EXPECT_EQ(left, right);
+}
+
+TEST(TBitField, double_inversion) //Двойное отрицание, тот же элемент
+{
+    const int size = 8;
+    TBitField bf(size);
+    bf.SetBit(0);
+    bf.SetBit(3);
+    bf.SetBit(7);
+
+    TBitField doubleNeg = ~(~bf);
+
+    EXPECT_EQ(bf, doubleNeg);
 }
