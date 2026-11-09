@@ -19,6 +19,8 @@ TBitField::TBitField(int len)
     BitLen = len;
     MemLen = (len + BIE - 1) / BIE;
     pMem = new TELEM[MemLen];
+    if (pMem == nullptr)
+        throw std::runtime_error("Out of memory");
     for (int i = 0; i < MemLen; i++)
         pMem[i] = 0;
 
@@ -31,6 +33,8 @@ TBitField::TBitField(const TBitField& bf) // конструктор копиро
     MemLen = bf.MemLen;
 
     pMem = new TELEM[MemLen];
+    if (pMem == nullptr)
+        throw std::runtime_error("Out of memory");
     for (int i = 0; i < MemLen; i++)
     {
         pMem[i] = bf.pMem[i];
@@ -216,10 +220,14 @@ istream& operator>>(istream& istr, TBitField& bf) // ввод
     string s;
     istr >> s;
     for (int i = 0; i < s.length() && i < bf.GetLength(); i++)
+    {
         if (s[i] == '1')
             bf.SetBit(i);
-        else
+        else if (s[i] == '0')
             bf.ClrBit(i);
+        else
+            throw std::invalid_argument("Must be only 0 or 1");
+    }
 
     return istr;
 }

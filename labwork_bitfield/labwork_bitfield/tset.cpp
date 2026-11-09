@@ -36,16 +36,22 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
+    if (Elem < 0 || Elem >= MaxPower)
+        throw std::invalid_argument("Wrong element");
     return BitField.GetBit(Elem);
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
+    if (Elem < 0 || Elem >= MaxPower)
+        throw std::invalid_argument("Wrong element");
     BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
+    if (Elem < 0 || Elem >= MaxPower)
+        throw std::invalid_argument("Wrong element");
     BitField.ClrBit(Elem);
 }
 
